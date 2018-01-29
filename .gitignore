@@ -1,3 +1,5 @@
+/.idea/
+
 # ---> Symfony
 # Cache and logs (Symfony2)
 /app/cache/*
@@ -74,3 +76,10 @@ $RECYCLE.BIN/
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
+
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
