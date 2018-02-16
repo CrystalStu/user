@@ -1,91 +1,11 @@
-{% extends "base.html.twig" %}
+{% extends "base.twig" %}
 {% block title %}Crystal User System{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
 {% endblock %}
 {% block body %}
-<nav class="navbar navbar-default">
-  <div class="container-fluid"> 
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="navbar-brand" href="#">Crystal Studios</a></div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <!-- Nothing. -->
-    <!-- /.navbar-collapse --> 
-  </div>
-  <!-- /.container-fluid --> 
-</nav>
-<!--
-<div style="float: right; height: 40px">
-	<iframe id="frame_content" src="//user.cstu.gq/api/display.php" scrolling="no" frameborder="0" height="256"></iframe>
-</div>
--->
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Crystal Studios</h1>
-    </div>
-  </div>
-  <hr>
-</div>
-<div class="container">
-  <div class="row text-center">
-    <div class="col-md-8 col-md-offset-2">Crystal Studios is a united organization that help people's living & relaxing & researching. <br /><strong>Feel free to use our services :-)</strong> </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="text-center col-md-12">
-      <div class="well"><strong> Studios</strong></div>
-    </div>
-    <div class="col-sm-12">
-    	<ul>
-    		<li><a href="https://ccs.cstu.gq/"><img src="logo/compu.png" />&nbsp;Crystal Computer Studio</a></li>
-			<li><a href="//shang.qq.com/wpa/qunwpa?idkey=44b62fb337d78b9a23ee7ecbdbff40229227b883757b29bbaa4ba04456f35f84"><img src="http://lib.cstu.gq/logo/quartz.png" />&nbsp;Minecraft QUARTZ Studio</a></li>
-			<li><a href="https://vast-light.iask.in/"><img src="logo/vast-light.png" />&nbsp;Minecraft Vast-Light Studio</a></li>
-    	</ul>
-    </div>
-  </div>
-  <hr>
-    <div class="row">
-        <div class="text-center col-md-12">
-            <div class="well"><strong> Partners</strong></div>
-        </div>
-        <div class="col-sm-12">
-            <ul>
-                <li><a href="https://www.boulkoo.com/"><img src="https://www.boulkoo.com/favicon.ico" />&nbsp;BOULKOO</a></li>
-                <li><a href="http://www.snang.cc/"><img src="https://avatars3.githubusercontent.com/u/32928937?s=200&v=4" />&nbsp;SNANQ Studio</a></li>
-            </ul>
-        </div>
-    </div>
-    <hr>
-  <div class="row">
-    <div class="text-center col-md-12">
-      <div class="well"><strong> Applications</strong></div>
-    </div>
-  </div>
-  <div class="row">
-  	<div class="col-sm-12">
-  		<ul>
-  			<li><a href="http://edu.cstu.gq/"><img src="http://lib.cstu.gq/logo/edu.png" />&nbsp;Education</a></li>
-  			<li><a href="http://business.cstu.gq/"><img src="http://lib.cstu.gq/logo/business.png" />&nbsp;Business</a></li>
-  			<li><a href="http://drive.cstu.gq/"><img src="http://lib.cstu.gq/logo/drive.png" />&nbsp;Drive</a></li>
-  			<li><a href="http://dev.cstu.gq/"><img src="http://lib.cstu.gq/logo/dev.png" />&nbsp;Development</a></li>
-  			<li><a href="your-voice"><img src="http://lib.cstu.gq/logo/your-voice.png" />&nbsp;Your Voice</a></li>
-  			<li><a href="about"><img src="http://lib.cstu.gq/logo/about.png" />&nbsp;About</a></li>
-  			<li><a href="http://live.cstu.gq/"><img src="http://lib.cstu.gq/logo/live.png" />&nbsp;Live Stream</a></li>
-  			<li><a href="store"><img src="http://lib.cstu.gq/logo/store.png" />&nbsp;Store</a></li>
-  			<li><a href="http://forum.cstu.gq/"><img src="http://lib.cstu.gq/logo/forum.png" />&nbsp;Forum</a></li>
-  			<li><a href="http://server.cstu.gq/game"><img src="http://lib.cstu.gq/logo/game.png" />&nbsp;Game</a></li>
-  		</ul>
-  	</div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="text-center col-md-6 col-md-offset-3">
-      <p>Copyright &copy; Crystal Web Service &middot; All Rights Reserved</p>
-    </div>
-  </div>
-  <hr>
-</div>
+    <h2>Crystal User System</h2>
+    <p>ID: {{ id }}</p>
+    <p>Username: {{ username }}</p>
+    <p>Password: {{ password }}</p>
 {% endblock %}

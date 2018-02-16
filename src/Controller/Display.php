@@ -10,7 +10,20 @@ class Display extends Controller
     /**
      * @Route("/display")
      */
-    public function showAction() {
-        return $this->render("display.twig");
+    public function showErr() {
+        return $this->render("error.twig", array(
+            'reason' => "Did not give a valid fundamental id",
+        ));
+    }
+
+    /**
+     * @Route("/display/{id}")
+     */
+    public function showUserDetail($id) {
+        return $this->render("display.twig", array(
+            'id' => $id,
+            'username' => 'TURX',
+            'password' => '',
+        ));
     }
 }

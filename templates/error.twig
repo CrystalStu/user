@@ -1,0 +1,11 @@
+{% extends "base.twig" %}
+{% block title %}Something went wrong..{% endblock %}
+{% block body %}
+    <h1>OMG.. Something went wrong!</h1>
+    <p>Reason:
+        {% if reason is defined %}
+            {{ reason }}
+            {% else %}
+            Unknown
+        {% endif %} </p>
+{% endblock %}

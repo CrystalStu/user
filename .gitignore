@@ -1,6 +1,10 @@
 /.idea/
 
 # ---> Symfony
+# Sensitive properties
+.env
+.env.dist
+
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
