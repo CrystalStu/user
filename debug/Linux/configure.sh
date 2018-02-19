@@ -1,7 +1,8 @@
 #!bin bash
 ##########################################
-# Symfony Debug Server Startup Script    #
+# Symfony Debug Server Configure Script  #
 # Script by TURX (turuixuan@foxmail.com) #
 # Powered by (c) Crystal Studio          #
 ##########################################
-php -S localhost:8000 -t public
+composer install
+php bin/console doctrine:schema:update --force

@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +13,39 @@ class Register extends Controller
     /**
      * @Route("/fundamental/register")
      */
-    public function new(Request $request) {
+    public function registerAction(Request $request) {
+        // Build the form
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+
+        // Handle the POST submit
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+
+            // Encode the password
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+            $user->setActive(true);
+            $user->setAdmin(0);
+
+            // Save the user to the database
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            // Send email, or do something...
+
+            // return $this->redirectToRoute('app_register_new');
+        }
+
+        return $this->render(
+            'fundamental/register.twig', array(
+                'form' => $form->createView()
+            )
+        );
+    }
+    /*public function new(Request $request) {
         $task = new User();
         // $task->setUsername('Username');
         // $task->setPassword('Password');
@@ -38,5 +68,5 @@ class Register extends Controller
         return $this->render('fundamental/register.twig', array(
             'form' => $form->createView(),
         ));
-    }
+    }*/
 }
