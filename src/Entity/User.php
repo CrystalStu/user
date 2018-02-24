@@ -51,6 +51,10 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->admin;
     }
 
+    public function getSession() {
+        return $this->session;
+    }
+
     public function isAccountNonExpired()
     {
         return true;
@@ -97,6 +101,10 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function setAdmin($value) {
         $this->admin = $value;
+    }
+
+    public function setSession($value) {
+        $this->session = $value;
     }
 
     public function eraseCredentials()
@@ -180,4 +188,10 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="integer")
      */
     private $admin;
+
+    /**
+     * @ORM\Column(type="string", length=4096)
+     * @Assert\Length(max=4096)
+     */
+    private $session;
 }
