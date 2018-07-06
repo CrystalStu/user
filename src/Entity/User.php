@@ -190,7 +190,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $admin;
 
     /**
-     * @ORM\Column(type="string", length=4096)
+     * @ORM\Column(type="string", length=4096, nullable=true)
      * @Assert\Length(max=4096)
      */
     private $session;
