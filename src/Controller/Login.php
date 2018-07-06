@@ -36,7 +36,7 @@ class Login extends Controller
             if($user) {
                 $userId = $user->getId();
                 // Set session
-                $session = sha1($userId . $username . $password . date() . time());
+                $session = sha1($userId . $username . $password . date("m/d/Y") . time());
                 $user->setSession($session);
                 setcookie('user', $user->getSession(), 2592000, null,'.cstu.gq', true);
                 return $this->redirectToRoute('/display/' . $user->getId());
