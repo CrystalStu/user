@@ -4,19 +4,21 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserLoginType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class Login extends Controller
+class Login extends AbstractController
 {
+    private $logger;
 
     /**
      * @Route("fundamental/login")
      */
-    public function loginAction(Request $request) {
+    public function loginAction(Request $request, LoggerInterface $logger) {
         // Build the form
         $user = new User();
         $form = $this->createForm(UserLoginType::class, $user);
@@ -39,7 +41,11 @@ class Login extends Controller
                 $session = sha1($userId . $username . $password . date("m/d/Y") . time());
                 $user->setSession($session);
                 setcookie('user', $user->getSession(), 2592000, null,'.cstu.gq', true);
-                return $this->redirectToRoute('/display/' . $user->getId());
+                if($_ENV == 'dev') {
+                    setcookie('user', $user->getSession(), 2592000, null, '127.0.0.1', true);
+                    setcookie('user', $user->getSession(), 2592000, null, 'localhost', true);
+                }
+                return $this->redirectToRoute('app_display_show' . $user->getId());
             }
         }
 

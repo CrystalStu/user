@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class Display extends Controller
+class Display extends AbstractController
 {
     /**
      * @Route("/display")
@@ -22,10 +22,10 @@ class Display extends Controller
      * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function showUserDetail($id) {
-        return $this->render("display.twig", array(
+        return $this->render("display.twig", [
             'id' => $id,
-            'username' => 'TURX',
+            'username' => 'T',
             'password' => '',
-        ));
+        ]);
     }
 }

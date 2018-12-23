@@ -19,6 +19,8 @@ security:
             form_login:
               login_path: /fundamental/login
               check_path: /fundamental/login
+              username_parameter: user_login[username]
+              password_parameter: user_login[plainPassword]
 
             # activate different ways to authenticate
 
