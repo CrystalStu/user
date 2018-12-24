@@ -47,28 +47,4 @@ class Register extends AbstractController
             )
         );
     }
-    /*public function new(Request $request) {
-        $task = new User();
-        // $task->setUsername('Username');
-        // $task->setPassword('Password');
-
-        $form = $this->createFormBuilder($task)
-            ->add("Username", TextType::class)
-            ->add("Password", PasswordType::class)
-            ->add('Register', SubmitType::class, array(
-                'label' => 'Register'
-            ))
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $task = $form->getData();
-            return $this->redirectToRoute('task_success');
-        }
-
-        return $this->render('fundamental/register.twig', array(
-            'form' => $form->createView(),
-        ));
-    }*/
 }
