@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+{% block title %}Crystal User System - Registration Verification Code{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    <h2>Crystal User System - Registration Verification Code</h2>
+    <hr />
+    <p>ID: {{ id }}</p>
+    <p>Username: {{ username }}</p>
+    <p>Email: {{ email }}</p>
+    <br />
+    <p>Verification Code: <b>{{ code }}</b></p>
+{% endblock %}

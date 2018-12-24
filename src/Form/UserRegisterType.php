@@ -32,14 +32,14 @@ class UserRegisterType extends AbstractType
                 'constraints' => new IsTrue(),
             ))
             ->add('submit', SubmitType::class, array(
-                'label' => 'Register!',
+                'label' => 'Register!'
             ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\User',
+            'data_class' => 'App\Entity\User'
         ));
     }
 }

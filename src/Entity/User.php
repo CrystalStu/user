@@ -12,11 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-    private function encryptPassword($value) {
-        $value = md5($value);
-        $value = sha1($value);
-        return $value;
-    }
 
     /*public function __construct($id)
     {
@@ -47,12 +42,20 @@ class User implements UserInterface
         return $this->active;
     }
 
+    public function getVerificationCode() {
+        return $this->verificationCode;
+    }
+
     public function getAdmin() {
         return $this->admin;
     }
 
     public function getSession() {
         return $this->session;
+    }
+
+    public function getLastSent() {
+        return $this->lastSent;
     }
 
     public function isAccountNonExpired()
@@ -103,8 +106,16 @@ class User implements UserInterface
         $this->admin = $value;
     }
 
+    public function setVerificationCode($value) {
+        $this->verificationCode = $value;
+    }
+
     public function setSession($value) {
         $this->session = $value;
+    }
+
+    public function setLastSent($value) {
+        $this->lastSent = $value;
     }
 
     public function eraseCredentials()
@@ -170,8 +181,20 @@ class User implements UserInterface
     private $admin;
 
     /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     * @Assert\Length(max=32)
+     */
+    private $verificationCode;
+
+    /**
      * @ORM\Column(type="string", length=4096, nullable=true)
      * @Assert\Length(max=4096)
      */
     private $session;
+
+    /**
+     * @ORM\Column(type="string", length=4096, nullable=true)
+     * @Assert\Length(max=4096)
+     */
+    private $lastSent;
 }
