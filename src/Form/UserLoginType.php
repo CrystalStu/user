@@ -20,7 +20,7 @@ class UserLoginType extends AbstractType
             ))
             ->add('plainPassword', PasswordType::class)
             ->add('submit', SubmitType::class, array(
-                'label' => 'Login!'
+                'label' => 'LoginAbandoned!'
             ));
     }
 

@@ -12,6 +12,8 @@ class Register extends AbstractController
 {
     /**
      * @Route("/fundamental/register")
+     * @param Request $request
+     * @return null
      */
     public function registerAction(Request $request) {
         // Build the form

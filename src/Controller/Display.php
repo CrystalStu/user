@@ -18,6 +18,13 @@ class Display extends AbstractController
     }
 
     /**
+     * @Route("/display/loginSuccess")
+     */
+    public function showLoginSuccess() {
+        return $this->render("loginSuccess.twig");
+    }
+
+    /**
      * @Route("/display/{id}")
      * @Security("has_role('IS_AUTHENTICATED_REMEMBERED')")
      */

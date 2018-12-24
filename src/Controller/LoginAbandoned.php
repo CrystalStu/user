@@ -11,12 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class Login extends AbstractController
+class LoginAbandoned extends AbstractController
 {
-    private $logger;
 
     /**
-     * @Route("fundamental/login")
+     * @Route("fundamental/login/abandoned")
+     * @param Request $request
+     * @param LoggerInterface $logger
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function loginAction(Request $request, LoggerInterface $logger) {
         // Build the form
@@ -50,7 +52,7 @@ class Login extends AbstractController
         }
 
         return $this->render(
-            'fundamental/login.twig', array(
+            'login_abandoned.twig', array(
                 'form' => $form->createView()
             )
         );
