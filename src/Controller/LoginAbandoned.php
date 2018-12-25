@@ -9,14 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class LoginAbandoned extends AbstractController
-{
+class LoginAbandoned extends AbstractController {
 
     /**
      * @Route("fundamental/login/abandoned")
-     * @param Request $request
+     * @param Request         $request
      * @param LoggerInterface $logger
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
@@ -27,7 +25,7 @@ class LoginAbandoned extends AbstractController
 
         // Handle the POST request
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $username = $request->get('username');
             // Encode the password
             $password = $this->get('security.password_encoder')->encodePassword($user, $request->get('plainPassword'));
@@ -37,13 +35,13 @@ class LoginAbandoned extends AbstractController
                 'username' => $username,
                 'password' => $password
             ]);
-            if($user) {
+            if ($user) {
                 $userId = $user->getId();
                 // Set session
                 $session = sha1($userId . $username . $password . date("m/d/Y") . time());
                 $user->setSession($session);
-                setcookie('user', $user->getSession(), 2592000, null,'.cstu.gq', true);
-                if($_ENV == 'dev') {
+                setcookie('user', $user->getSession(), 2592000, null, '.cstu.gq', true);
+                if ($_ENV == 'dev') {
                     setcookie('user', $user->getSession(), 2592000, null, '127.0.0.1', true);
                     setcookie('user', $user->getSession(), 2592000, null, 'localhost', true);
                 }
@@ -51,10 +49,8 @@ class LoginAbandoned extends AbstractController
             }
         }
 
-        return $this->render(
-            'login_abandoned.twig', array(
-                'form' => $form->createView()
-            )
-        );
+        return $this->render('login_abandoned.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }

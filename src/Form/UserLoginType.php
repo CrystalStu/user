@@ -10,24 +10,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserLoginType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('username', TextType::class, array(
-                'label' => 'Username / Email'
-            ))
-            ->add('plainPassword', PasswordType::class)
-            ->add('submit', SubmitType::class, array(
-                'label' => 'LoginAbandoned!'
-            ));
+class UserLoginType extends AbstractType {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder->add('username', TextType::class, array('label' => 'Username / Email'))
+                ->add('plainPassword', PasswordType::class)
+                ->add('submit', SubmitType::class, array('label' => 'LoginAbandoned!'));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\User',
-        ));
+    public function configureOptions(OptionsResolver $resolver) {
+        $resolver->setDefaults(array('data_class' => 'App\Entity\User',));
     }
 }

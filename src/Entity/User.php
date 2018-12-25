@@ -10,13 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
-{
-
-    /*public function __construct($id)
-    {
-        $this->id = $id;
-    }*/
+class User implements UserInterface {
 
     public function getId() {
         return $this->id;
@@ -58,23 +52,19 @@ class User implements UserInterface
         return $this->lastSent;
     }
 
-    public function isAccountNonExpired()
-    {
+    public function isAccountNonExpired() {
         return true;
     }
 
-    public function isAccountNonLocked()
-    {
+    public function isAccountNonLocked() {
         return true;
     }
 
-    public function isCredentialsNonExpired()
-    {
+    public function isCredentialsNonExpired() {
         return true;
     }
 
-    public function isEnabled()
-    {
+    public function isEnabled() {
         return $this->active;
     }
 
@@ -118,18 +108,15 @@ class User implements UserInterface
         $this->lastSent = $value;
     }
 
-    public function eraseCredentials()
-    {
+    public function eraseCredentials() {
         // TODO: Implement eraseCredentials() method.
     }
 
-    public function getRoles()
-    {
+    public function getRoles() {
         return array('ROLE_USER');
     }
 
-    public function getSalt()
-    {
+    public function getSalt() {
         // The bcrypt and argon2i algorithms don't require a separate salt.
         // You *may* need a real salt if you choose a different encoder.
         return null;

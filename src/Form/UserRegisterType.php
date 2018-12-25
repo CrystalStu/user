@@ -14,32 +14,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
-class UserRegisterType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options' => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
-            ->add('email', EmailType::class)
-            ->add('termsAccepted', CheckboxType::class, array(
-                'label' => 'I accept the terms and services.',
-                'mapped' => false,
-                'constraints' => new IsTrue(),
-            ))
-            ->add('submit', SubmitType::class, array(
-                'label' => 'Register!'
-            ));
+class UserRegisterType extends AbstractType {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder->add('username', TextType::class)->add('plainPassword', RepeatedType::class, array(
+            'type' => PasswordType::class,
+            'first_options' => array('label' => 'Password'),
+            'second_options' => array('label' => 'Repeat Password'),
+        ))->add('email', EmailType::class)->add('termsAccepted', CheckboxType::class, array(
+            'label' => 'I accept the terms and services.',
+            'mapped' => false,
+            'constraints' => new IsTrue(),
+        ))->add('submit', SubmitType::class, array('label' => 'Register!'));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\User'
-        ));
+    public function configureOptions(OptionsResolver $resolver) {
+        $resolver->setDefaults(array('data_class' => 'App\Entity\User'));
     }
 }

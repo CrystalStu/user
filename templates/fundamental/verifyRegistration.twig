@@ -2,11 +2,12 @@
 {% block title %}Crystal User System{% endblock %}
 {% block body %}
     <h2>Crystal User System - Verify Registration</h2>
-    <hr />
+    <hr/>
     <p>ID: {{ userid }}</p>
     <p>Username: {{ username }}</p>
-    <p><b>A verification email was sent to your email inbox (may be junk box), please type your verification code in the field below:</b></p>
+    <p><b>A verification email was sent to your email inbox (may be junk box), please type your verification code in the
+            field below:</b></p>
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+    {{ form_widget(form) }}
     {{ form_end(form) }}
 {% endblock %}

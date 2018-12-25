@@ -2,10 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
@@ -13,8 +11,7 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
  * @package App\Repository
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class UserRepository extends EntityRepository implements UserLoaderInterface
-{
+class UserRepository extends EntityRepository implements UserLoaderInterface {
     /*
     public function __construct(RegistryInterface $registry)
     {
@@ -22,14 +19,13 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     }
     */
 
-    public function loadUserByUsername($username)
-    {
+    public function loadUserByUsername($username) {
         return $this->createQueryBuilder('u')
-            ->where('u.username = :username OR u.email = :email')
-            ->setParameter('username', $username)
-            ->setParameter('email', $username)
-            ->getQuery()
-            ->getOneOrNullResult();
+                    ->where('u.username = :username OR u.email = :email')
+                    ->setParameter('username', $username)
+                    ->setParameter('email', $username)
+                    ->getQuery()
+                    ->getOneOrNullResult();
     }
 
     /*

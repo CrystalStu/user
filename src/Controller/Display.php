@@ -2,13 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\User;
 
-class Display extends AbstractController
-{
+class Display extends AbstractController {
     /**
      * @Route("/display")
      */
