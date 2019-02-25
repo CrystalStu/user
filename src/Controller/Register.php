@@ -68,7 +68,7 @@ class Register extends AbstractController {
 
         $verificationCode = substr($passwordEncoder->encodePassword($user, $user->getUsername() . $user->getEmail()), 0, 32);
 
-        if (time() - $user->getLastSent() > 180 && (!$form->isSubmitted() && $form->isValid())) {
+        if (time() - $user->getLastSent() > 180 && !$form->isSubmitted()) {
             $user->setLastSent(time());
             $user->setVerificationCode($verificationCode);
             $em = $this->getDoctrine()->getManager();

@@ -20,7 +20,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Format
 ### .env
-```
+```.env
 # This file is a "template" of which env vars need to be defined for your application
 # Copy this file to .env file for development, create environment variables when deploying to production
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
