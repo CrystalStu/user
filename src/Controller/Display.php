@@ -39,21 +39,31 @@ class Display extends AbstractController {
      * @return Response
      */
     public function showMe() {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $user = $this->get('security.token_storage')->getToken()->getUser();
         if (!$user->getActive()) {
             $this->addFlash('userid', $user->getId());
             return $this->redirectToRoute('app_register_verifyregistration');
         }
-        if ($user == "anon.") {
-            $this->addFlash('reason', 'You have not logged yet.');
-            return $this->redirectToRoute('app_display_showerr');
+        $tGrp = $user->getGrp();
+        if (!sizeof($tGrp)) {
+            $tGrp = array(
+                'None.'
+            );
+        } else {
+            for ($t = 0; $t < sizeof($tGrp) - 1; $t++) {
+                $tGrp[$t] .= ', '; // Add a comma after every element except the end
+            }
+            if (sizeof($tGrp) > 1) $tGrp[sizeof($tGrp) - 2] .= 'and ';
+            $tGrp[sizeof($tGrp) - 1] .= '.';
         }
         return $this->render("display.twig", [
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'password' => $user->getPassword(),
-            'admin' => $user->getAdmin()
+            'admin' => $user->getAdmin(),
+            'grp' => $tGrp
         ]);
     }
 

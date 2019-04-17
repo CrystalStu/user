@@ -1,37 +1,41 @@
 security:
-    encoders:
-      App\Entity\User:
-        algorithm: bcrypt
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        UserProvider:
-          entity:
-            class: App:User
-            property: username
-        in_memory: { memory: ~ }
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: ~
-            provider: UserProvider
-            form_login:
-              login_path: /fundamental/login
-              check_path: /fundamental/login
-              username_parameter: user_login[username]
-              password_parameter: user_login[plainPassword]
-            guard:
-                authenticators:
-                    - App\Security\LoginAuthenticator
-            logout:
-              path: /fundamental/logout
-              target: /fundamental/login
+  encoders:
+    App\Entity\User:
+      algorithm: bcrypt
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    UserProvider:
+      entity:
+        class: App:User
+        property: username
+    in_memory: { memory: ~ }
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      anonymous: ~
+      provider: UserProvider
+      form_login:
+        login_path: /fundamental/login
+        check_path: /fundamental/login
+        username_parameter: user_login[username]
+        password_parameter: user_login[plainPassword]
+      guard:
+        authenticators:
+          - App\Security\LoginAuthenticator
+      logout:
+        path: /fundamental/logout
+        target: /fundamental/login
+      remember_me:
+        secret: '%kernel.secret%'
+        lifetime: 604800 # 1 week in seconds
+        path: /
 
-            # activate different ways to authenticate
+      # activate different ways to authenticate
 
-            # http_basic: ~
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+      # http_basic: ~
+      # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
-            # form_login: ~
-            # https://symfony.com/doc/current/security/form_login_setup.html
+      # form_login: ~
+      # https://symfony.com/doc/current/security/form_login_setup.html

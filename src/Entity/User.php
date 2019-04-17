@@ -68,10 +68,6 @@ class User implements UserInterface {
         return $this->active;
     }
 
-    public function setId($value) {
-        $this->id = $value;
-    }
-
     public function setUsername($value) {
         $this->username = $value;
     }
@@ -184,4 +180,34 @@ class User implements UserInterface {
      * @Assert\Length(max=4096)
      */
     private $lastSent;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $grp = [];
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $mGrp;
+
+    public function getGrp(): ?array {
+        return $this->grp;
+    }
+
+    public function setGrp(?array $grp): self {
+        $this->grp = $grp;
+
+        return $this;
+    }
+
+    public function getMGrp(): ?int {
+        return $this->mGrp;
+    }
+
+    public function setMGrp(?int $mGrp): self {
+        $this->mGrp = $mGrp;
+
+        return $this;
+    }
 }

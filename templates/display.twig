@@ -10,5 +10,10 @@
     <p>Email: {{ email }}</p>
     <p>Password: {{ password }}</p>
     <p>Admin Permission Level: {{ admin }}</p>
+    <p>Group joint:
+        {% for t in grp %}
+            {{ t }}
+        {% endfor %}
+    </p>
     <a href="{{ path('app_logout') }}">Logout</a>
 {% endblock %}
