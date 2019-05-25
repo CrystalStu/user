@@ -104,6 +104,14 @@ class User implements UserInterface {
         $this->lastSent = $value;
     }
 
+    public function getApiKey() {
+        return $this->apiKey;
+    }
+
+    public function setApiKey($value) {
+        $this->apiKey = $value;
+    }
+
     public function eraseCredentials() {
         // TODO: Implement eraseCredentials() method.
     }
@@ -168,6 +176,12 @@ class User implements UserInterface {
      * @Assert\Length(max=32)
      */
     private $verificationCode;
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     * @Assert\Length(max=32)
+     */
+    private $apiKey;
 
     /**
      * @ORM\Column(type="string", length=4096, nullable=true)

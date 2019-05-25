@@ -5,11 +5,13 @@
 {% endblock %}
 {% block body %}
     <h2>Crystal User System</h2>
+    <img src="https://www.gravatar.com/avatar/{{ avatar }}" alt="Avatar">
     <p>ID: {{ id }}</p>
     <p>Username: {{ username }}</p>
     <p>Email: {{ email }}</p>
     <p>Password: {{ password }}</p>
     <p>Admin Permission Level: {{ admin }}</p>
+    <p>API Key: {{ key }}</p>
     <p>Group joint:
         {% for t in grp %}
             {{ t }}

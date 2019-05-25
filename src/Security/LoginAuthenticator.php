@@ -26,8 +26,12 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator {
     private $router;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $apiKey;
 
-    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder) {
+    public function __construct(EntityManagerInterface $entityManager,
+        RouterInterface $router,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        UserPasswordEncoderInterface $passwordEncoder) {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -64,6 +68,11 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator {
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
 
+        $this->apiKey = md5($user->getUsername() . $user->getPassword() . date_timestamp_get(date_create()));
+        $user->setApiKey($this->apiKey);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
         return $user;
     }
 
@@ -77,6 +86,9 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator {
         }
 
         // For example : return new RedirectResponse($this->router->generate('some_route'));
+        if (isset($_GET['redirect'])) {
+            return new RedirectResponse($_GET['redirect'] . (parse_url($_GET['redirect'], PHP_URL_QUERY) ? '&' : '?') . 'key=' . $this->apiKey);
+        }
         return new RedirectResponse($this->router->generate('app_display_showme'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }

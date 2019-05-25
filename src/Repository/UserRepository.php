@@ -17,9 +17,26 @@ class UserRepository extends ServiceEntityRepository {
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function size() {
         $qb = $this->createQueryBuilder('t');
         return $qb->select('count(t.id)')->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param $value
+     * @return User|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByApiKey($value): ?User {
+        return $this->createQueryBuilder('u')
+                    ->andWhere('u.apiKey = :val')
+                    ->setParameter('val', $value)
+                    ->getQuery()
+                    ->getOneOrNullResult();
     }
 
     // /**

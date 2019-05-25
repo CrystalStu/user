@@ -45,6 +45,7 @@ class Display extends AbstractController {
             $this->addFlash('userid', $user->getId());
             return $this->redirectToRoute('app_register_verifyregistration');
         }
+        $avatarHash = md5(strtolower(trim($user->getEmail())));
         $tGrp = $user->getGrp();
         if (!sizeof($tGrp)) {
             $tGrp = array(
@@ -58,11 +59,13 @@ class Display extends AbstractController {
             $tGrp[sizeof($tGrp) - 1] .= '.';
         }
         return $this->render("display.twig", [
+            'avatar' => $avatarHash,
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'password' => $user->getPassword(),
             'admin' => $user->getAdmin(),
+            'key' => $user->getApiKey(),
             'grp' => $tGrp
         ]);
     }
@@ -78,12 +81,28 @@ class Display extends AbstractController {
             $this->addFlash('reason', 'This user ID does not exist.');
             return $this->redirectToRoute('app_display_showerr');
         }
+        $avatarHash = md5(strtolower(trim($user->getEmail())));
+        $tGrp = $user->getGrp();
+        if (!sizeof($tGrp)) {
+            $tGrp = array(
+                'None.'
+            );
+        } else {
+            for ($t = 0; $t < sizeof($tGrp) - 1; $t++) {
+                $tGrp[$t] .= ', '; // Add a comma after every element except the end
+            }
+            if (sizeof($tGrp) > 1) $tGrp[sizeof($tGrp) - 2] .= 'and ';
+            $tGrp[sizeof($tGrp) - 1] .= '.';
+        }
         return $this->render("display.twig", [
+            'avatar' => $avatarHash,
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'password' => $user->getPassword(),
-            'admin' => $user->getAdmin()
+            'admin' => $user->getAdmin(),
+            'key' => $user->getApiKey(),
+            'grp' => $tGrp
         ]);
     }
 }
