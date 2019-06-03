@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -27,6 +28,8 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator {
     private $csrfTokenManager;
     private $passwordEncoder;
     private $apiKey;
+    private $left;
+    private $domain;
 
     public function __construct(EntityManagerInterface $entityManager,
         RouterInterface $router,
@@ -87,9 +90,34 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator {
 
         // For example : return new RedirectResponse($this->router->generate('some_route'));
         if (isset($_GET['redirect'])) {
-            return new RedirectResponse($_GET['redirect'] . (parse_url($_GET['redirect'], PHP_URL_QUERY) ? '&' : '?') . 'key=' . $this->apiKey);
+            $url = $_GET['redirect'];
+            $this->left = 0;
+            for ($t = 0; $t < strlen($url); $t++) {
+                if ($t == strlen($url) - 1) {
+                    $this->domain = substr($url, $this->left, $t - $this->left);
+                    break;
+                }
+                if ($url[$t] == '/') {
+                    if ($url[$t + 1] == '/') {
+                        $t += 2;
+                        $this->left = $t;
+                        continue;
+                    }
+                    $this->domain = substr($url, $this->left, $t - $this->left);
+                    break;
+                }
+                if ($this->left != 0 && $url[$t] == ':') {
+                    $this->domain = substr($url, $this->left, $t - $this->left);
+                    break;
+                }
+            }
+            $response = new RedirectResponse($_GET['redirect']);
+            $response->headers->setCookie(new Cookie("cws-user-key", $this->apiKey, time() + 3600 * 24 * 7, null, $this->domain));
+            return $response;
+            // return new RedirectResponse($_GET['redirect'] . (parse_url($_GET['redirect'], PHP_URL_QUERY) ? '&' : '?') . 'key=' . $this->apiKey);
         }
-        return new RedirectResponse($this->router->generate('app_display_showme'));
+        return new RedirectResponse($this->router->generate('app_rootrefuse_show'));
+        // return new RedirectResponse($this->router->generate('app_display_showme'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
